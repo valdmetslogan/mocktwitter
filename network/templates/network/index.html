@@ -1,0 +1,41 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <form action="{% url 'index' %}" name="submit_post" value="submit_post" method="POST">
+        {% csrf_token %}
+        <div class="col">
+            <textarea class='in-house' name='new_post' placeholder="What's on your mind?"></textarea>
+        </div>
+        <div>
+            <input type="submit" placeholder="Make Post">
+        </div>
+    </form>
+    <div id="post-feed-container">
+        <button id='refresh_button'>Refresh Posts</button>
+        <div>
+            {% for post in my_list %}  
+                <div id="postSubstance">
+                    <div>
+                        {{post.textBody}}
+                    </div>
+                    <ul>
+                        <li>{{post.Likes}}</li>
+                        <li>{{post.Dislikes}}</li>
+                    </ul>
+                    <div>
+                        {{post.User}}
+                    </div>
+                </div>
+                <div id="postInteract">
+                    <!--need to add value to buttons to differentiate between posts-->
+                    <button name='like'>Like</button>
+                    <button name='dislike'>Dislike</button>
+                    <button name='comment'>Comment</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+        
+        <!--use this space to automatically populate users feed on render-->
+    </ul>   
+{% endblock %}
